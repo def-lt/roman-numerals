@@ -1,23 +1,27 @@
-# Roman Numerals Converter
+# Roman Numerals Converter (C#)
 
 Перевод числа (1–3999) в римскую запись и обратно.
 
-## Функции
+## Методы
 
-- `int_to_roman(num: int) -> str` — число → римская запись
-- `roman_to_int(s: str) -> int` — римская запись → число
+- `IntToRoman(int num)` — число → римская запись
+- `RomanToInt(string s)` — римская запись → число
 
 ## Пример
 
-```python
-from roman_numerals import int_to_roman, roman_to_int
-
-print(int_to_roman(1994))      # MCMXCIV
-print(roman_to_int("MCMXCIV")) # 1994
+```csharp
+Console.WriteLine(RomanNumerals.IntToRoman(1994));      // MCMXCIV
+Console.WriteLine(RomanNumerals.RomanToInt("MCMXCIV")); // 1994
 ```
 
 ## Запуск
 
 ```bash
-python roman_numerals.py
+dotnet new console -n RomanApp
+# скопируй RomanNumerals.cs в проект и вызови RomanNumerals.Main()
+```
+
+Или просто:
+```bash
+csc RomanNumerals.cs && RomanNumerals.exe
 ```
