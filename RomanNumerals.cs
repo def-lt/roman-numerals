@@ -59,16 +59,58 @@ public static class RomanNumerals
         return total;
     }
 
-    // Примеры
     public static void Main()
     {
-        Console.WriteLine(IntToRoman(1994));       // MCMXCIV
-        Console.WriteLine(RomanToInt("MCMXCIV"));  // 1994
+        Console.WriteLine("=== Римские числа ===");
+        Console.WriteLine("1 — число → римская запись");
+        Console.WriteLine("2 — римская запись → число");
+        Console.Write("Выбери режим (1 или 2): ");
 
-        Console.WriteLine(IntToRoman(58));         // LVIII
-        Console.WriteLine(RomanToInt("LVIII"));    // 58
+        string choice = Console.ReadLine()?.Trim();
 
-        Console.WriteLine(IntToRoman(3999));       // MMMCMXCIX
-        Console.WriteLine(RomanToInt("MMMCMXCIX")); // 3999
+        if (choice == "1")
+        {
+            Console.Write("Введи число (1–3999): ");
+            string input = Console.ReadLine()?.Trim();
+
+            if (int.TryParse(input, out int num))
+            {
+                try
+                {
+                    string roman = IntToRoman(num);
+                    Console.WriteLine($"Римская запись: {roman}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Ошибка: " + ex.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Нужно ввести целое число.");
+            }
+        }
+        else if (choice == "2")
+        {
+            Console.Write("Введи римское число: ");
+            string roman = Console.ReadLine()?.Trim();
+
+            try
+            {
+                int number = RomanToInt(roman);
+                Console.WriteLine($"Число: {number}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка: " + ex.Message);
+            }
+        }
+        else
+        {
+            Console.WriteLine("Неверный выбор. Введи 1 или 2.");
+        }
+
+        Console.WriteLine("\nНажми Enter, чтобы выйти...");
+        Console.ReadLine();
     }
 }
