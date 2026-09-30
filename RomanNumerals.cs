@@ -61,24 +61,53 @@ public static class RomanNumerals
 
     public static void Main()
     {
-        Console.WriteLine("=== Римские числа ===");
-        Console.WriteLine("1 — число → римская запись");
-        Console.WriteLine("2 — римская запись → число");
-        Console.Write("Выбери режим (1 или 2): ");
-
-        string choice = Console.ReadLine()?.Trim();
-
-        if (choice == "1")
+        while (true)   // <-- вот здесь
         {
-            Console.Write("Введи число (1–3999): ");
-            string input = Console.ReadLine()?.Trim();
+            Console.WriteLine("\n=== Римские числа ===");
+            Console.WriteLine("1 — число → римская запись");
+            Console.WriteLine("2 — римская запись → число");
+            Console.WriteLine("0 — выход");
+            Console.Write("Выбери режим: ");
 
-            if (int.TryParse(input, out int num))
+            string choice = Console.ReadLine()?.Trim();
+
+            if (choice == "0")
             {
+                Console.WriteLine("Выход...");
+                break;   // выходим из while
+            }
+
+            if (choice == "1")
+            {
+                Console.Write("Введи число (1–3999): ");
+                string input = Console.ReadLine()?.Trim();
+
+                if (int.TryParse(input, out int num))
+                {
+                    try
+                    {
+                        string roman = IntToRoman(num);
+                        Console.WriteLine($"Римская запись: {roman}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Ошибка: " + ex.Message);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Нужно ввести целое число.");
+                }
+            }
+            else if (choice == "2")
+            {
+                Console.Write("Введи римское число: ");
+                string roman = Console.ReadLine()?.Trim();
+
                 try
                 {
-                    string roman = IntToRoman(num);
-                    Console.WriteLine($"Римская запись: {roman}");
+                    int number = RomanToInt(roman);
+                    Console.WriteLine($"Число: {number}");
                 }
                 catch (Exception ex)
                 {
@@ -87,30 +116,8 @@ public static class RomanNumerals
             }
             else
             {
-                Console.WriteLine("Нужно ввести целое число.");
+                Console.WriteLine("Неверный выбор. Введи 0, 1 или 2.");
             }
         }
-        else if (choice == "2")
-        {
-            Console.Write("Введи римское число: ");
-            string roman = Console.ReadLine()?.Trim();
-
-            try
-            {
-                int number = RomanToInt(roman);
-                Console.WriteLine($"Число: {number}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Ошибка: " + ex.Message);
-            }
-        }
-        else
-        {
-            Console.WriteLine("Неверный выбор. Введи 1 или 2.");
-        }
-
-        Console.WriteLine("\nНажми Enter, чтобы выйти...");
-        Console.ReadLine();
     }
 }
